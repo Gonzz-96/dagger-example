@@ -1,9 +1,11 @@
-package com.wizeline.erick.dependency.new_dagger_example.view
+package com.wizeline.erick.dependency.new_dagger_example.view.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.wizeline.erick.dependency.new_dagger_example.R
+import com.wizeline.erick.dependency.new_dagger_example.view.lol.LolActivity
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -11,7 +13,8 @@ import dagger.android.HasAndroidInjector
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity(), HasAndroidInjector, MainContract.View {
+class MainActivity : AppCompatActivity(), HasAndroidInjector,
+    MainContract.View {
 
     @Inject lateinit var dispatch: DispatchingAndroidInjector<Any>
     @Inject lateinit var string: String
@@ -28,6 +31,9 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector, MainContract.View 
 
         mainText.setOnClickListener {
             presenter.processText("This was done from presenter")
+            startActivity(
+                Intent(this, LolActivity::class.java)
+            )
         }
     }
 

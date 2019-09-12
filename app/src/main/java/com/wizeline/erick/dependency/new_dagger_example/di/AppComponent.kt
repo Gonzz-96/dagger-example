@@ -7,7 +7,7 @@ import dagger.Component
 import dagger.android.AndroidInjectionModule
 
 @Component(
-    modules = [AndroidInjectionModule::class, AppModule::class, MainBinder::class]
+    modules = [AndroidInjectionModule::class, AppModule::class, ActivityBinder::class]
 )
 interface AppComponent {
 

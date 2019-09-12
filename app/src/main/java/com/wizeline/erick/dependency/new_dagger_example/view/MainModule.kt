@@ -1,28 +1,14 @@
 package com.wizeline.erick.dependency.new_dagger_example.view
 
-import dagger.Binds
-import dagger.BindsInstance
 import dagger.Module
 import dagger.Provides
 
-@Module(
-    includes = [
-        MainModule.UiModule::class
-    ]
-)
+@Module
 class MainModule {
+    @Provides
+    fun getView(activity: MainActivity): MainContract.View = activity
 
-    @Module
-    interface UiModule {
-        @Binds
-        fun getView(activity: MainActivity): MainContract.View
-
-        @Binds
-        fun presenter(presenter: MainPresenter): MainContract.Presenter
-    }
 
     @Provides
-    fun getMainPresenter(view: MainContract.View) = MainPresenter(view)
-
-
+    fun getMainPresenter(view: MainContract.View): MainContract.Presenter = MainPresenter(view)
 }

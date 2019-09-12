@@ -1,14 +1,14 @@
 package com.wizeline.erick.dependency.new_dagger_example.view
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.annotation.IntegerRes
+import androidx.appcompat.app.AppCompatActivity
 import com.wizeline.erick.dependency.new_dagger_example.R
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
+import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), HasAndroidInjector, MainContract.View {
@@ -25,6 +25,10 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector, MainContract.View 
         setContentView(R.layout.activity_main)
 
         showToast()
+
+        mainText.setOnClickListener {
+            presenter.processText("This was done from presenter")
+        }
     }
 
     private fun showToast() {
@@ -32,4 +36,8 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector, MainContract.View 
     }
 
     override fun androidInjector(): AndroidInjector<Any> = dispatch
+
+    override fun showText(s: String) {
+        Toast.makeText(this, s, Toast.LENGTH_LONG).show()
+    }
 }
